@@ -11,6 +11,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"runtime"
 	"strings"
 
 	"github.com/gorilla/handlers"
@@ -107,6 +108,10 @@ func handleUpload(ROOTDIR string) func(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusMethodNotAllowed)
 			return
 		}
+
+		defer func() {
+			go runtime.GC()
+		}()
 
 		r.ParseMultipartForm(1024 * 1024 * 1024)
 		file, handler, err := r.FormFile("file")
