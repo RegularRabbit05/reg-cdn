@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title>Upload File</title>
+    </head>
+    <body>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input required type="password" name="apikey" placeholder="API Key"> <br><br>
+            <input required type="file" name="file" placeholder="File"> <br><br>
+            <input type="text" name="fileName" placeholder="File Name"> <br><br>
+            Versioned?<input type="checkbox" name="versioned"> <br><br>
+            <input type="submit" value="Confirm Upload"> <br><br>
+        </form>
+    </body>
+</html>
