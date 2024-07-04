@@ -178,12 +178,7 @@ func handleUpload(ROOTDIR string) func(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 			defer f.Close()
-			buf := bytes.NewBuffer(nil)
-			if _, err := io.Copy(buf, file); err != nil {
-				w.WriteHeader(http.StatusInternalServerError)
-				return
-			}
-			_, err = io.Copy(f, buf)
+			_, err = io.Copy(f, file)
 			if err != nil {
 				w.WriteHeader(http.StatusInternalServerError)
 				return
@@ -219,7 +214,7 @@ func main() {
 		w.Write(IndexPage)
 	}).Methods("GET", "OPTIONS")
 
-	log.Println("Starting server on port " + PORT)
+	log.Println("Started server on port " + PORT)
 	err := http.ListenAndServe(":"+PORT, handlers.LoggingHandler(os.Stdout, r))
 	if err != nil {
 		log.Fatalln(err.Error())
