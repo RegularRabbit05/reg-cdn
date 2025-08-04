@@ -213,7 +213,7 @@ func main() {
 	}).Methods("GET", "OPTIONS")
 
 	log.Println("Started server on port " + PORT)
-	err := http.ListenAndServe(":"+PORT, handlers.LoggingHandler(os.Stdout, r))
+	err := http.ListenAndServe(":"+PORT, handlers.LoggingHandler(os.Stdout, handlers.ProxyHeaders(r)))
 	if err != nil {
 		log.Fatalln(err.Error())
 		return
