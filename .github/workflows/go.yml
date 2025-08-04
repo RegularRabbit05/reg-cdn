@@ -19,3 +19,4 @@ jobs:
         goos: linux
         goarch: amd64
         binary_name: Server
+        release_tag: ${{ github.event.release.tag_name }}
